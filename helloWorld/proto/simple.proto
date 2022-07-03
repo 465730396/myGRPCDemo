@@ -1,0 +1,30 @@
+syntax = "proto3";// 协议为proto3
+
+option go_package = "./;proto";
+
+package proto;
+
+message SimpleRequest{
+  string data  = 1;
+}
+
+
+message SimpleResponse{
+  int64  code = 1;
+  string value = 2;
+}
+
+// 定义流式请求信息
+message StreamRequest{
+  //流请求参数
+  string question = 1;
+}
+message StreamResponse{
+  //流响应数据
+  string answer = 1;
+}
+
+service Simple{
+  rpc Route(SimpleRequest) returns (SimpleResponse){};
+  rpc Conversations(stream StreamRequest) returns(stream StreamResponse){};
+}
